@@ -13,27 +13,18 @@
     </div>
   </div>
   <div v-else>
-    <NotFoundView />
   </div>
 </template>
 
-<script>
-import NotFoundView from "./NotFoundView.vue";
+<script setup>
+import { ref, onMounted } from 'vue';
 import {request} from "@/remote";
+import {useRoute} from "vue-router";
 
-export default {
-  name: "ProductDetailView",
+const product = ref({});
+const route = useRoute();
 
-  components: {NotFoundView},
-
-  data() {
-    return {
-      product: {}
-    }
-  },
-
-  async mounted() {
-    this.product = await request(`/products/${this.$route.params.productId}`, 'GET')
-  }
-}
+onMounted(async () => {
+  product.value = await request(`/products/${route.params.productId}`, 'GET')
+})
 </script>

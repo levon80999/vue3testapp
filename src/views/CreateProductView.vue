@@ -31,29 +31,27 @@
   <button class="btn btn-primary" @click.prevent="createProduct()">Create</button>
 </template>
 
-<script>
-import { request } from '@/remote/index'
+<script setup lang="ts">
+import { ref } from 'vue'
+import {request} from "@/remote";
 
-export default {
-  name: 'CreateProductView',
-  data() {
-    return {
-      name: '',
-      description: '',
-      price: '',
-      image: '',
-    }
-  },
+const name = ref('');
+const description = ref('');
+const price = ref('');
+const image = ref('');
 
-  methods: {
-    createProduct() {
-      request('/products/', 'post', {
-        name: this.name,
-        description: this.description,
-        price: this.price,
-        image: this.image,
-      })
-    }
+const createProduct = () =>  {
+  try {
+    request('/products/', 'post', {
+      name: name.value,
+      description: description.value,
+      price: price.value,
+      image: image.value,
+    })
+
+    window.location.href = '/products'
+  } catch (err) {
+    console.error(err)
   }
 }
 </script>

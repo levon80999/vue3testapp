@@ -10,21 +10,17 @@
       <button>Create Product</button>
     </router-link>
     <router-link to="/cart" class="cart-link">
-      <button>Shopping Cart </button>
+      <button>Shopping Cart ({{ cartItems }})</button>
     </router-link>
   </div>
 </template>
 
-<script>
+<script setup>
 import logo from '@/assets/logo-hexagon.svg'
 
-export default {
-  name: 'NavBar',
+import {storeToRefs} from "pinia";
+import {useCartStore} from "@/store";
 
-  data() {
-    return {
-      logo
-    }
-  }
-}
+const cartStore = useCartStore()
+const {cartItems} = storeToRefs(cartStore)
 </script>

@@ -18,15 +18,6 @@
   <button class="checkout-button">Checkout</button>
 </template>
 
-<script>
+<script setup>
 import { cartItems } from "@/temp-data";
-
-export default {
-  name: "ShoppingCartView",
-  data() {
-    return {
-      cartItems
-    }
-  }
-}
 </script>
